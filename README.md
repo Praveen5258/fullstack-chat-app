@@ -26,6 +26,11 @@ CLOUDINARY_CLOUD_NAME=...
 CLOUDINARY_API_KEY=...
 CLOUDINARY_API_SECRET=...
 
+# Required for the in-chat AI assistant
+OPENAI_API_KEY=...
+# Optional; defaults to gpt-4.1-mini
+OPENAI_MODEL=gpt-4.1-mini
+
 NODE_ENV=development
 ```
 
@@ -40,3 +45,11 @@ npm run build
 ```shell
 npm start
 ```
+
+### AI chat assistant
+
+Each conversation has an **AI** button beside the composer. It can summarize the current chat, suggest a reply, translate the latest message, rewrite the draft in a selected tone, and answer questions from the conversation context. Set `OPENAI_API_KEY` in the environment of the deployed backend; it is never exposed to the browser.
+
+### Deploy
+
+The repository is ready for a single-service deployment (for example Render or Railway): use `npm run build` as the build command and `npm start` as the start command. Add `MONGODB_URI`, `JWT_SECRET`, Cloudinary values, `OPENAI_API_KEY`, and `NODE_ENV=production` to the host's environment variables. The Express server serves `frontend/dist` in production.

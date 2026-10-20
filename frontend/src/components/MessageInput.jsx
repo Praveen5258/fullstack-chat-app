@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { Image, Send, X } from "lucide-react";
 import toast from "react-hot-toast";
+import AIAssistant from "./AIAssistant";
 
 const MessageInput = () => {
   const [text, setText] = useState("");
@@ -70,6 +71,7 @@ const MessageInput = () => {
       )}
 
       <form onSubmit={handleSendMessage} className="flex items-center gap-2">
+        <AIAssistant draft={text} onUseResult={setText} />
         <div className="flex-1 flex gap-2">
           <input
             type="text"

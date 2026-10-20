@@ -2,10 +2,15 @@ import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import cloudinary from "../lib/cloudinary.js";
+import mongoose from "mongoose";
 
 export const signup = async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
+    if (mongoose.connection.readyState !== 1) {
+      return res.status(503).json({ message: "Database is unavailable. Check the MongoDB connection." });
+    }
+
     if (!fullName || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
